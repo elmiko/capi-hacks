@@ -1,0 +1,3 @@
+export POD_CIDR=["172.17.0.0/16"]
+export SERVICE_CIDR=["10.0.1.0/24"]
+export SERVICE_DOMAIN="cluster.local"
