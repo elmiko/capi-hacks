@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cluster-autoscaler
+  namespace: default
+  labels:
+    app: cluster-autoscaler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cluster-autoscaler
+  template:
+    metadata:
+      labels:
+        app: cluster-autoscaler
+    spec:
+      volumes:
+        - name: kubeconfig-secret
+          secret:
+            secretName: kubeconfig-secret
+        - name: cloud-config-secret
+          secret:
+            secretName: cloud-config-secret
+      containers:
+        - name: autoscaler
+          image: localhost:5000/cluster-autoscaler:dev
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: kubeconfig-secret
+              mountPath: "/etc/kubeconfig-secret"
+              readOnly: true
+            - name: cloud-provider-secret
+              mountPath: "/etc/cloud-provider-secret"
+              readOnly: true
+          args:
+            - /cluster-autoscaler
+            - --cloud-provider=clusterapi
+            - --v=4
+            - --namespace=default
+            - --max-nodes-total=30
+            - --scale-down-delay-after-add=10s
+            - --scale-down-delay-after-delete=10s
+            - --scale-down-delay-after-failure=10s
+            - --scale-down-unneeded-time=23s
+            - --max-node-provision-time=2m
+            - --balance-similar-node-groups
+            - --expander=random
+            - --kubeconfig=/etc/kubeconfig-secret
+            - --cloud-config=/etc/cloud-provider-secret
+
