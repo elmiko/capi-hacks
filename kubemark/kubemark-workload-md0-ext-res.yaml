@@ -41,6 +41,11 @@ metadata:
 spec:
   template:
     spec:
+      extraMounts:
+        - name: containerd-sock
+          containerPath: /run/containerd/containerd.sock
+          hostPath: /run/containerd/containerd.sock
+          type: Socket
       kubemarkOptions:
         extendedResources:
           cpu: 16
