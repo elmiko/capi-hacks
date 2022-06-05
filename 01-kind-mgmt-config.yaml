@@ -5,7 +5,7 @@ networking:
   apiServerAddress: "127.0.0.1"
 nodes:
 - role: control-plane
-  image: docker.io/kindest/node:v1.22.2
+  image: docker.io/kindest/node:v1.24.1
   extraMounts:
     - hostPath: /var/run/docker.sock
       containerPath: /var/run/docker.sock
