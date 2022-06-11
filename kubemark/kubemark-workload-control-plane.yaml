@@ -75,4 +75,4 @@ spec:
       name: kubemark-workload-control-plane
       namespace: default
   replicas: 1
-  version: v1.22.2
+  version: v1.23.7
