@@ -8,7 +8,7 @@ this repo contains scripts to:
 * setup a docker registry for kind
 * start a cluster api management cluster with docker and kubemark providers
 * get kubeconfig files for kind clusters
-* deploy cni to cluster api workload clusters
+* deploy cni (Calico or OVN) to cluster api workload clusters
 * start a local cluster autoscaler
 
 and kubernetes manifests for creating various cluster api kubemark clusters.
