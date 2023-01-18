@@ -1,0 +1,21 @@
+---
+global:
+  writeToFile: false
+  indexerConfig:
+    enabled: false
+
+jobs:
+  - name: kubelet-density
+    preLoadImages: false
+    jobIterations: 100
+    qps: 20
+    burst: 20
+    namespacedIterations: false
+    namespace: kubelet-density
+    waitWhenFinished: true
+    podWait: false
+    objects:
+      - objectTemplate: pod.yaml
+        replicas: 1
+        inputVars:
+          containerImage: gcr.io/google_containers/pause-amd64:3.0
