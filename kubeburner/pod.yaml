@@ -1,0 +1,16 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: kubelet-density-
+  labels:
+    name: kubelet-density
+spec:
+  containers:
+  - name: kubelet-density
+    image: 
+    ports:
+    - containerPort: 8080
+      protocol: TCP
+    imagePullPolicy: IfNotPresent
+    securityContext:
+      privileged: false
