@@ -18,3 +18,8 @@ Tested with:
 * Kubernetes 1.23.6
 * cluster-api 1.3.0
 * cluster-api-provider-kubemark v0.5.0
+
+Some additional usefull resources:
+* [Demo at DevConf.cz 2022](https://vimeo.com/671479117): Testing at Scale with Cluster API and Kubemark
+* Notes on [Setting Up a Development Environment for the Cluster API Kubemark Provider](https://notes.elmiko.dev/2021/10/11/setup-dev-capi-kubemark.html)
+* [Blog post](https://josecastillolema.github.io/kubemark/) describing the step by step use of this repo
