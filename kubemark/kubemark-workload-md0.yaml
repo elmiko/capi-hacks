@@ -29,7 +29,7 @@ spec:
         apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
         kind: KubemarkMachineTemplate
         name: kubemark-workload-md-0
-      version: 1.23.6
+      version: 1.28.7
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
 kind: KubemarkMachineTemplate
