@@ -6,8 +6,8 @@ else
     kubeconfig_flag="--kubeconfig $1"
 fi
 
-capi_version="v1.5.99"
-capk_version="v0.5.99"
+capi_version="v1.7.99"
+capk_version="v0.7.99"
 
 clusterctl init \
     --core cluster-api:$capi_version \
