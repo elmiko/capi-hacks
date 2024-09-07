@@ -14,5 +14,5 @@ clusterctl init \
     --bootstrap kubeadm:$capi_version \
     --control-plane kubeadm:$capi_version \
     --infrastructure kubemark:$capk_version,docker:$capi_version \
-    --config ~/.cluster-api/dev-repository/config.yaml $kubeconfig_flag
+    --config ~/.config/cluster-api/dev-repository/config.yaml $kubeconfig_flag
 
