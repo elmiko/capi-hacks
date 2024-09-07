@@ -51,7 +51,7 @@ spec:
           cpu: 16
           memory: 128G
 ---
-apiVersion: bootstrap.cluster.x-k8s.io/v1alpha4
+apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
 kind: KubeadmConfigTemplate
 metadata:
   name: kubemark-workload-md-0
