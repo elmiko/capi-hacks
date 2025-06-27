@@ -13,11 +13,6 @@ metadata:
     node.cluster.x-k8s.io/karpenter-member: ""
   name: km-wl-kubemark-md-1
   namespace: default
-  ownerReferences:
-  - apiVersion: cluster.x-k8s.io/v1beta1
-    kind: Cluster
-    name: km-cp
-    uid: a834de54-29c1-48d4-840d-246a582ba8f0
 spec:
   clusterName: km-cp
   minReadySeconds: 0
@@ -55,7 +50,7 @@ apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
 kind: KubemarkMachineTemplate
 metadata:
   labels:
-    cluster.x-k8s.io/cluster-name: kubemark-workload
+    cluster.x-k8s.io/cluster-name: km-cp
   name: km-wl-kubemark-md-1
   namespace: default
 spec:
