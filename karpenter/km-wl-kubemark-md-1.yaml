@@ -7,7 +7,7 @@ metadata:
     capacity.cluster-autoscaler.kubernetes.io/maxPods: "100"
     capacity.cluster-autoscaler.kubernetes.io/memory: "16G"
     capacity.cluster-autoscaler.kubernetes.io/cpu: "4"
-    capacity.cluster-autoscaler.kubernetes.io/labels: kubernetes.io/arch=amd64
+    capacity.cluster-autoscaler.kubernetes.io/labels: kubernetes.io/arch=amd64,karpenter.sh/capacity-type=reserved,node.kubernetes.io/instance-type=kubemark-1
   labels:
     cluster.x-k8s.io/cluster-name: km-cp
     node.cluster.x-k8s.io/karpenter-member: ""
@@ -17,7 +17,7 @@ spec:
   clusterName: km-cp
   minReadySeconds: 0
   progressDeadlineSeconds: 600
-  replicas: 0
+  replicas: 1
   revisionHistoryLimit: 1
   selector:
     matchLabels:
@@ -39,7 +39,7 @@ spec:
         configRef:
           apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
           kind: KubeadmConfigTemplate
-          name: km-wl-kubemark-md-1
+          name: km-wl-kubemark-md-0
       clusterName: km-cp
       infrastructureRef:
         apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
@@ -51,7 +51,7 @@ apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
 kind: KubemarkMachineTemplate
 metadata:
   labels:
-    cluster.x-k8s.io/cluster-name: km-cp
+    cluster.x-k8s.io/cluster-name: kubemark-workload
   name: km-wl-kubemark-md-1
   namespace: default
 spec:
@@ -66,15 +66,9 @@ spec:
         extendedResources:
           cpu: 4
           memory: 16G
----
-apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
-kind: KubeadmConfigTemplate
-metadata:
-  name: km-wl-kubemark-md-1
-  namespace: default
-spec:
-  template:
-    spec:
-      joinConfiguration:
-        nodeRegistration:
-          name: ''
+        registerWithTaints:
+          - key: karpenter.sh/unregistered
+            effect: NoExecute
+        nodeLabels:
+          karpenter.sh/capacity-type: reserved
+          node.kubernetes.io/instance-type: kubemark-1
