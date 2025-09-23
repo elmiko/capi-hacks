@@ -1,0 +1,22 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: kind
+networking:
+  apiServerAddress: "127.0.0.1"
+nodes:
+- role: control-plane
+  image: docker.io/kindest/node:v1.30.0
+  extraMounts:
+    - hostPath: /var/run/docker.sock
+      containerPath: /var/run/docker.sock
+    - hostPath: /home/mike/capi-hacks/kind/patches
+      containerPath: /patches
+containerdConfigPatches:
+- |-
+  [plugins."io.containerd.grpc.v1.cri".registry.mirrors."localhost:5000"]
+    endpoint = ["http://kind-registry:5000"]
+kubeadmConfigPatches:
+  - |
+    kind: InitConfiguration
+    patches:
+      directory: /patches
