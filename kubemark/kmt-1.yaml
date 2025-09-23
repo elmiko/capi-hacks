@@ -1,0 +1,17 @@
+---
+apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
+kind: KubemarkMachineTemplate
+metadata:
+  labels:
+    cluster.x-k8s.io/cluster-name: kubemark-workload
+  name: kubemark-workload-md-1
+  namespace: default
+spec:
+  template:
+    spec:
+      extraMounts:
+        - name: containerd-sock
+          containerPath: /run/containerd/containerd.sock
+          hostPath: /run/containerd/containerd.sock
+          type: Socket
+

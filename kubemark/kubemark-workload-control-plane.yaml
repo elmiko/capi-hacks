@@ -55,8 +55,13 @@ spec:
         - 127.0.0.1
         - 0.0.0.0
         - host.docker.internal
-    initConfiguration: {}
-    joinConfiguration: {}
+      controllerManager:
+        extraArgs:
+          enable-hostpath-provisioner: "true"
+    initConfiguration:
+      nodeRegistration: {}
+    joinConfiguration:
+      nodeRegistration: {}
   machineTemplate:
     infrastructureRef:
       apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
@@ -64,4 +69,5 @@ spec:
       name: kubemark-workload-control-plane
       namespace: default
   replicas: 1
-  version: v1.29.8
+  version: v1.31.2
+

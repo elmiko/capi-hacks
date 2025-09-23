@@ -1,4 +1,4 @@
-apiVersion: cluster.x-k8s.io/v1beta1
+apiVersion: cluster.x-k8s.io/v1alpha4
 kind: MachineDeployment
 metadata:
   annotations:
@@ -29,7 +29,7 @@ spec:
         apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
         kind: KubemarkMachineTemplate
         name: kubemark-workload-md-0
-      version: 1.29.8
+      version: 1.28.7
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
 kind: KubemarkMachineTemplate
@@ -47,7 +47,7 @@ spec:
           hostPath: /run/containerd/containerd.sock
           type: Socket
 ---
-apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
+apiVersion: bootstrap.cluster.x-k8s.io/v1alpha4
 kind: KubeadmConfigTemplate
 metadata:
   name: kubemark-workload-md-0
