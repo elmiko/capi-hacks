@@ -5,8 +5,8 @@ metadata:
     cluster.x-k8s.io/cluster-api-autoscaler-node-group-max-size: "5"
     cluster.x-k8s.io/cluster-api-autoscaler-node-group-min-size: "1"
     capacity.cluster-autoscaler.kubernetes.io/maxPods: "100"
-    capacity.cluster-autoscaler.kubernetes.io/memory: "128G"
-    capacity.cluster-autoscaler.kubernetes.io/cpu: "16"
+    capacity.cluster-autoscaler.kubernetes.io/memory: "16G"
+    capacity.cluster-autoscaler.kubernetes.io/cpu: "4"
     capacity.cluster-autoscaler.kubernetes.io/labels: kubernetes.io/arch=amd64
   labels:
     cluster.x-k8s.io/cluster-name: km-cp
@@ -17,7 +17,7 @@ spec:
   clusterName: km-cp
   minReadySeconds: 0
   progressDeadlineSeconds: 600
-  replicas: 1
+  replicas: 0
   revisionHistoryLimit: 1
   selector:
     matchLabels:
@@ -33,18 +33,19 @@ spec:
       labels:
         cluster.x-k8s.io/cluster-name: km-cp
         cluster.x-k8s.io/deployment-name: km-wl-kubemark-md-1
+        node.cluster.x-k8s.io: workload-target
     spec:
       bootstrap:
         configRef:
           apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
           kind: KubeadmConfigTemplate
-          name: km-wl-kubemark-md-0
+          name: km-wl-kubemark-md-1
       clusterName: km-cp
       infrastructureRef:
         apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
         kind: KubemarkMachineTemplate
         name: km-wl-kubemark-md-1
-      version: v1.28.7
+      version: v1.31.2
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1alpha4
 kind: KubemarkMachineTemplate
@@ -63,6 +64,17 @@ spec:
           type: Socket
       kubemarkOptions:
         extendedResources:
-          cpu: 16
-          memory: 128G
-
+          cpu: 4
+          memory: 16G
+---
+apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
+kind: KubeadmConfigTemplate
+metadata:
+  name: km-wl-kubemark-md-1
+  namespace: default
+spec:
+  template:
+    spec:
+      joinConfiguration:
+        nodeRegistration:
+          name: ''

@@ -1,4 +1,4 @@
-apiVersion: karpenter.sh/v1beta1
+apiVersion: karpenter.sh/v1
 kind: NodePool
 metadata:
   name: default
@@ -9,7 +9,10 @@ spec:
         - key: "kubernetes.io/arch"
           operator: In
           values: ["amd64"]
+        - key: "node.cluster.x-k8s.io"
+          operator: In
+          values: ["workload-target"]
       nodeClassRef:
-        apiVersion: karpenter.cluster.x-k8s.io/v1alpha1
+        group: karpenter.cluster.x-k8s.io
         kind: ClusterAPINodeClass
         name: default
