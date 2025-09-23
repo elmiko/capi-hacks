@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scale-up
+  labels:
+    app: scale-up
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: scale-up
+  template:
+    metadata:
+      labels:
+        app: scale-up
+    spec:
+      nodeSelector:
+        node.cluster.x-k8s.io/user: elmiko
+      containers:
+        - name: busybox
+          image: quay.io/elmiko/busybox
+          resources:
+            requests:
+              memory: 2G
+              cpu: 500m
+          command:
+            - /bin/sh
+            - "-c"
+            - "echo 'this should be in the logs' && sleep 86400"
+      terminationGracePeriodSeconds: 0
