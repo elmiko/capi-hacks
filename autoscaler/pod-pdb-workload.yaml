@@ -32,7 +32,7 @@ spec:
           image: quay.io/elmiko/busybox
           resources:
             requests:
-              memory: 50Mib
+              memory: 50M
               cpu: 50m
           command:
             - /bin/sh
