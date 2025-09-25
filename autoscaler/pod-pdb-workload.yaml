@@ -17,13 +17,23 @@ spec:
     spec:
       nodeSelector:
         node.cluster.x-k8s.io: workload-target
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - scale-up
+            topologyKey: "kubernetes.io/hostname"
       containers:
         - name: busybox
           image: quay.io/elmiko/busybox
           resources:
             requests:
-              memory: 2G
-              cpu: 500m
+              memory: 50Mib
+              cpu: 50m
           command:
             - /bin/sh
             - "-c"
