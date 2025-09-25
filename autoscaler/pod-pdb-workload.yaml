@@ -22,10 +22,10 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             labelSelector:
               matchExpressions:
-              - key: app
-                operator: In
-                values:
-                - scale-up
+                - key: app
+                  operator: In
+                  values:
+                    - scale-up
             topologyKey: "kubernetes.io/hostname"
       containers:
         - name: busybox
