@@ -132,6 +132,9 @@ spec:
         extendedResources:
           cpu: 6
           memory: 6G
+        registerWithTaints:
+          - key: karpenter.sh/unregistered
+            effect: NoExecute
         nodeLabels:
           karpenter.sh/capacity-type: reserved
           node.kubernetes.io/instance-type: kubemark-large
@@ -155,6 +158,9 @@ spec:
         extendedResources:
           cpu: 4
           memory: 4G
+        registerWithTaints:
+          - key: karpenter.sh/unregistered
+            effect: NoExecute
         nodeLabels:
           karpenter.sh/capacity-type: reserved
           node.kubernetes.io/instance-type: kubemark-medium
@@ -178,6 +184,9 @@ spec:
         extendedResources:
           cpu: 2
           memory: 2G
+        registerWithTaints:
+          - key: karpenter.sh/unregistered
+            effect: NoExecute
         nodeLabels:
           karpenter.sh/capacity-type: reserved
           node.kubernetes.io/instance-type: kubemark-small
